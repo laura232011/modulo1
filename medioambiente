@@ -1,0 +1,21 @@
+#Bot code
+
+import discord #IMportamos la libreria discord
+from discord.ext import commands
+import random, os, requests
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+
+@bot.command()
+async def medioambiente(ctx):
+    medio_name = random.choice(os.listdir("medioambiente"))
+    with open(f'medioambiente/{medio_name}', 'rb') as f:
+        # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+        picture = discord.File(f)
+    # A continuación, podemos enviar este archivo como parámetro.
+    await ctx.send(file=picture)
+bot.run(token)
